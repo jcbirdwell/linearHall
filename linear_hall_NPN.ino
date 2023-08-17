@@ -9,6 +9,12 @@ float deltas[50] = {};
 void setup() {
   pinMode(linHall, INPUT);
   pinMode(switchPin, OUTPUT);
+  long baselines = 0;
+  for (int i = 0; i < 50; i++) {
+    baselines += analogRead(linHall);
+  }
+  baseline = (baselines / 50);
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -46,8 +52,10 @@ void loop() {
 
   deltas[0] = delta;    // usually ~96 when on and ~32 when off
 
+  Serial.println(dTotal);
+
   // using sum of last 50 deltas to avoid outliers
-  if (dTotal > 2500) {
+  if (dTotal > 2000) {
     // Serial.println("ON");
     digitalWrite(switchPin, HIGH);
   } else {
