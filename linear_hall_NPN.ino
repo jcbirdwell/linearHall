@@ -47,7 +47,7 @@ void loop() {
   deltas[0] = delta;    // usually ~96 when on and ~32 when off
 
   // using sum of last 50 deltas to avoid outliers
-  if (dTotal > 2000) {
+  if (dTotal > 2500) {
     // Serial.println("ON");
     digitalWrite(switchPin, HIGH);
   } else {
